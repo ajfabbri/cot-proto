@@ -23,3 +23,14 @@ jobs:
       - run: cargo build --verbose
       - run: cargo test --verbose
 
+  lint:
+    name: Lint
+    runs-on:
+        - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+          toolchain: nightly
+      - run: cargo fmt --all -- --check

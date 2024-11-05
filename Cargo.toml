@@ -1,5 +1,6 @@
 [package]
 name = "cot-proto"
+description = "Cursor on Target (CoT) protocol (de)serialization / parsing"
 version = "0.1.0"
 edition = "2021"
 keywords = ["cot", "protocol", "cursor_on_target"]

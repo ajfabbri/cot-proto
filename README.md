@@ -1,3 +1,5 @@
+[![Cargo Build & Test](https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml/badge.svg)](https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml)
+
 # Cursor on Target (COT) Protocol
 
 This library aims to provide a simple way to produce (serialize) and consume
@@ -9,7 +11,7 @@ This library aims to provide a simple way to produce (serialize) and consume
 
 ### TODOs
 - [ ] better types for timestamps/dates. Currently just strings.
-- [ ] support for detail contents (sub-schemas)
+- [ ] Add more typed schemas for common detail contents (sub-schemas)
 
 ## References
 1. Michael J. Kristan et al. November 2009 [Cursor on Target (CoT) Message Router User's Guide](https://www.mitre.org/sites/default/files/pdf/09_4937.pdf).

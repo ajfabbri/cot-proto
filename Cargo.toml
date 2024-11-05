@@ -1,0 +1,14 @@
+[package]
+name = "cot-proto"
+version = "0.1.0"
+edition = "2021"
+keywords = ["cot", "protocol", "cursor_on_target"]
+categories = ["network-programming"]
+license-file = "LICENSE"
+repository = "https://github.com/ajfabbri/cot-proto"
+rust-version = "1.74"
+authors = ["Aaron Fabbri"]
+
+[dependencies]
+quick-xml = { version = "0.37.0", features = ["serialize"] }
+serde = { version = "1.0.214", features = ["derive"] }

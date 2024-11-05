@@ -12,3 +12,4 @@ authors = ["Aaron Fabbri"]
 [dependencies]
 quick-xml = { version = "0.37.0", features = ["serialize"] }
 serde = { version = "1.0.214", features = ["derive"] }
+thiserror = "1.0.68"

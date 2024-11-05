@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-
 /// Base schema structure and ser/de.
 
 // See References section in README.md
@@ -21,7 +20,7 @@ pub const COT_BASE_EXAMPLE: &str = r#"
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename = "event")]
-pub struct Cot {
+pub struct Cot<D> {
     #[serde(rename = "@version")]
     pub version: String,
     #[serde(rename = "@uid")]
@@ -35,13 +34,15 @@ pub struct Cot {
     #[serde(rename = "@stale")]
     pub stale: String,
     #[serde(rename = "detail")]
-    pub detail: Detail,
+    pub detail: D,
     #[serde(rename = "point")]
     pub point: Point,
 }
 
+pub type CotBase = Cot<NoDetail>;
+
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
-pub struct Detail {}
+pub struct NoDetail {}
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Point {
@@ -64,12 +65,9 @@ mod test {
     fn test_serde() {
         // Create two Cot objects, one from example string and another from a round trip from that
         // to a string and back again. Validate values match.
-        println!("Initial:\n\t{}", COT_BASE_EXAMPLE);
-        let cot0: Cot = quick_xml::de::from_str(COT_BASE_EXAMPLE).unwrap();
+        let cot0: CotBase = quick_xml::de::from_str(COT_BASE_EXAMPLE).unwrap();
         let cot_str = quick_xml::se::to_string(&cot0).unwrap();
-        println!("Final:\n\t{}", cot_str);
-        let cot1: Cot = quick_xml::de::from_str(&cot_str).unwrap();
+        let cot1: CotBase = quick_xml::de::from_str(&cot_str).unwrap();
         assert_eq!(cot0, cot1);
     }
 }
-

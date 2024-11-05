@@ -5,8 +5,9 @@ version = "0.3.0"
 edition = "2021"
 keywords = ["cot", "protocol", "cursor_on_target"]
 categories = ["network-programming"]
-license-file = "LICENSE"
+license = "Apache-2.0"
 repository = "https://github.com/ajfabbri/cot-proto"
+documentation = "https://docs.rs/cot-proto"
 rust-version = "1.74"
 authors = ["Aaron Fabbri"]
 

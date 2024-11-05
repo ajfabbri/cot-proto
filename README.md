@@ -1,4 +1,11 @@
-[![Cargo Build & Test](https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml/badge.svg)](https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml)
+[![Build Status]][Actions] [![Latest Version]][crates.io] [![Documentation]][docs.rs]
+
+[Build Status]: https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml/badge.svg
+[Actions]: https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml
+[Latest Version]: https://img.shields.io/crates/v/cot_proto.svg
+[crates.io]: https://crates.io/crates/cot\_proto
+[Documentation]: https://docs.rs/cot_proto/badge.svg
+[docs.rs]: https://docs.rs/cot_proto
 
 # Cursor on Target (COT) Protocol
 

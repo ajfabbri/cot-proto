@@ -1,7 +1,5 @@
 /// Support for detecting common variants of CoT messages used by TAK, and parsing them into
 /// strongly-typed structs.
-use serde::{Deserialize, Serialize};
-
 use crate::{
     detail::{parse, CotUnparsedDetail},
     Error,
@@ -71,45 +69,6 @@ pub fn detect_tak_cot_type(input: &str) -> Result<TakCotMessage, Error> {
     })
 }
 
-/*
-pub fn parse_tak_cot(input: &str) -> Result<TakCot, Error> {
-    let mut reader = quick_xml::Reader::from_str(input);
-    reader.config_mut().trim_text(true);
-    let detail = extract_detail(reader)?;
-}
-*/
-
-#[derive(Serialize, Deserialize, Debug, PartialEq)]
-pub struct GeoFenceDetail {
-    shape: Shape,
-    #[serde(rename = "__geofence")]
-    geofence: GeoFence,
-    #[serde(rename = "strokeColor")]
-    stroke_color: StrokeColor,
-    #[serde(rename = "strokeWeight")]
-    stoke_weight: StrokeWeight,
-    #[serde(rename = "fillColor")]
-    fill_color: FillColor,
-    contact: Contact,
-    remarks: Remarks,
-    // `archive` is an empty element that is always present?
-    // Ommitting for now.
-    #[serde(rename = "labels_on")]
-    labels_on: bool,
-    #[serde(rename = "precisionlocation")]
-    precision_location: PrecisionLocation,
-}
-
-// TODO for now we punt on deserializing these sub-types
-pub type Shape = String;
-pub type GeoFence = String;
-pub type Contact = String;
-pub type StrokeColor = String;
-pub type StrokeWeight = String;
-pub type FillColor = String;
-pub type Remarks = String;
-pub type PrecisionLocation = String;
-
 #[cfg(test)]
 mod test {
     use std::path::PathBuf;
@@ -118,17 +77,7 @@ mod test {
     use serde::Serialize;
     use serde_json::Value;
 
-    use crate::{base::Cot, detail::parse, Error};
-
-    #[test]
-    fn test_attempt_string_deser() {
-        let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("src/tak/examples/geo-fence.cot");
-        let text = std::fs::read_to_string(&path).unwrap();
-        println!("attempting to parse {} with text:\n\t{}", path.to_str().unwrap(), text);
-        let geo_fence: Cot<GeoFenceDetail> = from_str(&text).unwrap();
-        println!("{:?}", geo_fence);
-    }
+    use crate::{detail::parse, Error};
 
     #[test]
     fn test_tak_cot_examples() {
@@ -196,7 +145,7 @@ mod test {
     }
     use regex::Regex;
 
-    use super::{GeoFenceDetail, TakCotType};
+    use super::TakCotType;
 
     #[allow(dead_code)]
     fn trim_whitespace(xml: &str) -> String {

@@ -1,4 +1,6 @@
-use serde::{Deserialize, Serialize};
+use chrono::{DateTime, Utc};
+use serde::de::Error as DeError;
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 /// Base schema structure and ser/de.
 
@@ -27,16 +29,45 @@ pub struct Cot<D> {
     pub uid: String,
     #[serde(rename = "@type")]
     pub cot_type: String,
-    #[serde(rename = "@time")]
-    pub time: String,
-    #[serde(rename = "@start")]
-    pub start: String,
-    #[serde(rename = "@stale")]
-    pub stale: String,
+    #[serde(
+        rename = "@time",
+        serialize_with = "serialize_date",
+        deserialize_with = "deserialize_date"
+    )]
+    pub time: DateTime<Utc>,
+    #[serde(
+        rename = "@start",
+        serialize_with = "serialize_date",
+        deserialize_with = "deserialize_date"
+    )]
+    pub start: DateTime<Utc>,
+    #[serde(
+        rename = "@stale",
+        serialize_with = "serialize_date",
+        deserialize_with = "deserialize_date"
+    )]
+    pub stale: DateTime<Utc>,
     #[serde(rename = "detail")]
     pub detail: D,
     #[serde(rename = "point")]
     pub point: Point,
+}
+pub fn serialize_date<S>(date: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    let s = date.to_rfc3339();
+    serializer.serialize_str(&s)
+}
+
+pub fn deserialize_date<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    DateTime::parse_from_rfc3339(&s)
+        .map_err(DeError::custom)
+        .map(|dt| dt.with_timezone(&Utc))
 }
 
 pub type CotBase = Cot<NoDetail>;
@@ -62,7 +93,7 @@ pub struct Point {
 mod test {
     use super::*;
     #[test]
-    fn test_serde() {
+    fn test_serde_roundtrip() {
         // Create two Cot objects, one from example string and another from a round trip from that
         // to a string and back again. Validate values match.
         let cot0: CotBase = quick_xml::de::from_str(COT_BASE_EXAMPLE).unwrap();

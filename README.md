@@ -17,7 +17,6 @@ This library aims to provide a simple way to produce (serialize) and consume
 - Basic Rust structs for CoT messages, with serde support.
 
 ### TODOs
-- [ ] better types for timestamps/dates. Currently just strings.
 - [ ] Add more typed schemas for common detail contents (sub-schemas)
 
 ## References

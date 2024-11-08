@@ -19,6 +19,7 @@ test-default = ["tak"]
 tak = []
 
 [dependencies]
+chrono = { version = "0.4.38", default-features = false, features = ["std"] }
 quick-xml = { version = "0.37.0", features = ["serialize"] }
 serde = { version = "1.0.214", features = ["derive"] }
 thiserror = "1.0.68"

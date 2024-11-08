@@ -14,9 +14,13 @@ use thiserror::Error;
 pub mod base;
 pub mod detail;
 pub mod examples;
+#[cfg(feature = "tak")]
+pub mod tak;
 
 #[derive(Debug, Error)]
 pub enum Error {
+    #[error(transparent)]
+    IoError(#[from] std::io::Error),
     #[error(transparent)]
     Xml(#[from] quick_xml::errors::Error),
     #[error(transparent)]

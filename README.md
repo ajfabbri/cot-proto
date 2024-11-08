@@ -21,5 +21,7 @@ This library aims to provide a simple way to produce (serialize) and consume
 - [ ] Add more typed schemas for common detail contents (sub-schemas)
 
 ## References
+The following sources were used to help develop this library:
 1. Michael J. Kristan et al. November 2009 [Cursor on Target (CoT) Message Router User's Guide](https://www.mitre.org/sites/default/files/pdf/09_4937.pdf).
 2. Mitre Corporation, via CoTreceiver. Captured Nov 2024. [CoT Schema Definitions (XSD)](https://github.com/mdudel/CoTreceiver/tree/master/lib/xsd)
+3. Android Tactical Assualt Kit (ATAK) CIV. Captured Nov 2024. [takcot/examples](https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV/tree/main/takcot/examples)

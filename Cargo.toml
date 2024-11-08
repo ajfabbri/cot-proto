@@ -11,7 +11,18 @@ documentation = "https://docs.rs/cot-proto"
 rust-version = "1.74"
 authors = ["Aaron Fabbri"]
 
+[features]
+default = []
+# test all features: use this in CI
+test-default = ["tak"]
+
+tak = []
+
 [dependencies]
 quick-xml = { version = "0.37.0", features = ["serialize"] }
 serde = { version = "1.0.214", features = ["derive"] }
 thiserror = "1.0.68"
+
+[dev-dependencies]
+regex = { version = "1.11.1" }
+serde_json = { version = "1.0.132" }

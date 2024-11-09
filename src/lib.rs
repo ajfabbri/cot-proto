@@ -19,8 +19,13 @@ pub mod tak;
 
 #[derive(Debug, Error)]
 pub enum Error {
+    #[error("message field error: {0}")]
+    BadField(&'static str),
+
     #[error(transparent)]
     IoError(#[from] std::io::Error),
+    #[error(transparent)]
+    XmlAttr(#[from] quick_xml::events::attributes::AttrError),
     #[error(transparent)]
     Xml(#[from] quick_xml::errors::Error),
     #[error(transparent)]

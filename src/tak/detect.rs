@@ -1,3 +1,5 @@
+use quick_xml::Reader;
+
 /// Support for detecting common variants of CoT messages used by TAK, and parsing them into
 /// strongly-typed structs.
 use crate::{
@@ -67,6 +69,42 @@ pub fn detect_tak_cot_type(input: &str) -> Result<TakCotMessage, Error> {
         cot_type: TakCotType::Other,
         cot_msg,
     })
+}
+
+/// Parse `type` attribute from a CoT message XML string.
+pub fn parse_cot_msg_type(text: &str) -> Result<String, Error> {
+    match xml_first_element_w_attr(text, "event", "type") {
+        Ok(Some(val)) => Ok(val),
+        _ => Err(Error::BadField("No element 'event' with attribute 'type'")),
+    }
+}
+
+/// XML parsing convenience
+pub fn xml_first_element_w_attr(
+    text: &str,
+    elt_name: &str,
+    attr_name: &str,
+) -> Result<Option<String>, Error> {
+    let mut reader = Reader::from_str(text);
+    reader.config_mut().trim_text(true);
+    loop {
+        match reader.read_event()? {
+            // Parse attribute `type` in the `event` element.
+            quick_xml::events::Event::Start(ref e) => {
+                if e.name().into_inner() == elt_name.as_bytes() {
+                    for attr in e.attributes() {
+                        let attr = attr?;
+                        if attr.key.into_inner() == attr_name.as_bytes() {
+                            return Ok(Some(String::from_utf8_lossy(&attr.value).to_string()));
+                        }
+                    }
+                }
+            }
+            quick_xml::events::Event::Eof => break,
+            _ => {}
+        }
+    }
+    Ok(None)
 }
 
 #[cfg(test)]

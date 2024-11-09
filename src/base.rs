@@ -1,6 +1,9 @@
 use chrono::{DateTime, Utc};
+use quick_xml::Reader;
 use serde::de::Error as DeError;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
+use crate::Error;
 
 /// Base schema structure and ser/de.
 
@@ -52,7 +55,44 @@ pub struct Cot<D> {
     #[serde(rename = "point")]
     pub point: Point,
 }
-pub fn serialize_date<S>(date: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error>
+
+/// Parse `type` attribute from a CoT message XML string.
+pub fn parse_cot_msg_type(text: &str) -> Result<String, Error> {
+    match xml_first_element_w_attr(text, "event", "type") {
+        Ok(Some(val)) => Ok(val),
+        _ => Err(Error::BadField("No element 'event' with attribute 'type'")),
+    }
+}
+
+/// XML parsing convenience
+pub fn xml_first_element_w_attr(
+    text: &str,
+    elt_name: &str,
+    attr_name: &str,
+) -> Result<Option<String>, Error> {
+    let mut reader = Reader::from_str(text);
+    reader.config_mut().trim_text(true);
+    loop {
+        match reader.read_event()? {
+            // Parse attribute `type` in the `event` element.
+            quick_xml::events::Event::Start(ref e) => {
+                if e.name().into_inner() == elt_name.as_bytes() {
+                    for attr in e.attributes() {
+                        let attr = attr?;
+                        if attr.key.into_inner() == attr_name.as_bytes() {
+                            return Ok(Some(String::from_utf8_lossy(&attr.value).to_string()));
+                        }
+                    }
+                }
+            }
+            quick_xml::events::Event::Eof => break,
+            _ => {}
+        }
+    }
+    Ok(None)
+}
+
+pub(crate) fn serialize_date<S>(date: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error>
 where
     S: Serializer,
 {
@@ -60,7 +100,7 @@ where
     serializer.serialize_str(&s)
 }
 
-pub fn deserialize_date<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
+pub(crate) fn deserialize_date<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
 where
     D: Deserializer<'de>,
 {

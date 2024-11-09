@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::base::deserialize_date;
 
-/// Support for creating TAK CoT messages.
+/// Type definitions for CoT detail sections for TAK messages.
 /// Limited message types supported so far.
 
 /// `<detail>` section for a Marker message, with reasonable defaults to put a dot on a map (i.e.
@@ -26,7 +26,7 @@ pub struct TakMarkerDetail {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Status {
     #[serde(rename = "@readiness")]
-    readiness: bool,
+    pub readiness: bool,
 }
 impl Default for Status {
     fn default() -> Self {
@@ -43,25 +43,25 @@ pub struct Link {
         serialize_with = "serialize_date",
         deserialize_with = "deserialize_date"
     )]
-    production_time: DateTime<Utc>,
+    pub production_time: DateTime<Utc>,
     #[serde(rename = "@type")]
-    cot_type: String,
+    pub cot_type: String,
     #[serde(rename = "@parent_callsign")]
-    parent_callsign: String,
+    pub parent_callsign: String,
     #[serde(rename = "@relation")]
-    relation: String,
+    pub relation: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Contact {
     #[serde(rename = "@callsign")]
-    callsign: String,
+    pub callsign: String,
     #[serde(rename = "emailAddress")]
-    email_address: Option<String>,
-    endpoint: Option<String>,
-    phone: Option<u32>,
+    pub email_address: Option<String>,
+    pub endpoint: Option<String>,
+    pub phone: Option<u32>,
     #[serde(rename = "xmppUsername")]
-    xmpp_username: Option<String>,
+    pub xmpp_username: Option<String>,
 }
 impl Default for Contact {
     fn default() -> Self {
@@ -79,27 +79,27 @@ impl Default for Contact {
 pub struct Remarks {
     // TODO is is probably not right
     #[serde(rename = "$value")]
-    source: Option<Vec<String>>,
+    pub source: Option<Vec<String>>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Color {
     #[serde(rename = "@argb")]
-    argb: i32,
+    pub argb: i32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct PrecisionLocation {
     #[serde(rename = "@altsrc")]
-    altsrc: String,
+    pub altsrc: String,
     #[serde(rename = "@geopointsrc")]
-    geopointsrc: Option<String>,
+    pub geopointsrc: Option<String>,
     #[serde(rename = "@PRECISE_IMAGE_FILE")]
-    pi_file: Option<String>,
+    pub pi_file: Option<String>,
     #[serde(rename = "@PRECISE_IMAGE_FILE_X")]
-    pi_file_x: Option<String>,
+    pub pi_file_x: Option<String>,
     #[serde(rename = "@PRECISE_IMAGE_FILE_Y")]
-    pi_file_y: Option<String>,
+    pub pi_file_y: Option<String>,
 }
 
 impl Default for PrecisionLocation {

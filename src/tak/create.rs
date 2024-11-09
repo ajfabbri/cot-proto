@@ -8,7 +8,15 @@ use super::detail::TakMarkerDetail;
 /// working.
 ///
 /// Instead of providing builder APIs, we implement [`Default`] on different CoT variants: You'll
-/// want to modify key fields like `point` with your real coordinates.
+/// want to modify key fields like `point` with your real coordinates. For example:
+/// ```rust
+/// use cot_proto::base::{Cot, Point};
+/// use cot_proto::tak::detail::TakMarkerDetail;
+/// let mut cot = Cot::<TakMarkerDetail>::default();
+/// cot.point.lat = 10.0;
+/// cot.point.lon = 90.0;
+/// let xml_text = quick_xml::se::to_string(&cot).unwrap();
+/// ```
 
 /// Default CoT type for marker messages.
 pub const DEFAULT_COT_TYPE_MARKER: &str = "a-o-G";

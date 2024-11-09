@@ -129,6 +129,18 @@ pub struct Point {
     pub le: f32,
 }
 
+impl Point {
+    pub fn north_pole() -> Self {
+        Self {
+            lat: 90.0,
+            lon: 0.0,
+            ce: 0.0,
+            hae: 0.0,
+            le: 0.0,
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;

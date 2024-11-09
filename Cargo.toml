@@ -12,17 +12,18 @@ rust-version = "1.74"
 authors = ["Aaron Fabbri"]
 
 [features]
-default = []
+default = ["tak"]
 # test all features: use this in CI
 test-default = ["tak"]
 
 tak = []
 
 [dependencies]
-chrono = { version = "0.4.38", default-features = false, features = ["std"] }
+chrono = { version = "0.4.38", default-features = false, features = ["std", "now"] }
 quick-xml = { version = "0.37.0", features = ["serialize"] }
 serde = { version = "1.0.214", features = ["derive"] }
 thiserror = "1.0.68"
+uuid = { version = "1.11.0", features = ["v4"] }
 
 [dev-dependencies]
 serde_json = { version = "1.0.132" }

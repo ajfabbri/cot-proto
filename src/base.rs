@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, SecondsFormat, Utc};
 use quick_xml::Reader;
 use serde::de::Error as DeError;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
@@ -96,7 +96,7 @@ pub(crate) fn serialize_date<S>(date: &DateTime<Utc>, serializer: S) -> Result<S
 where
     S: Serializer,
 {
-    let s = date.to_rfc3339();
+    let s = date.to_rfc3339_opts(SecondsFormat::Millis, true /* use Z for +00:00 */);
     serializer.serialize_str(&s)
 }
 

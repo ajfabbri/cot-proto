@@ -28,8 +28,8 @@ pub struct TakCotMessage {
 }
 
 /// Use a heuristic to detect the type of TAK XML CoT message contained in supplied text.
-/// Warning: This is based on known example messages from ATAK repository. Please do extended
-/// integration testing and file issues for any bugs you find.
+/// Warning: This is based on known example messages from ATAK repository.
+///   To get the raw type string, use [`parse_cot_msg_type()`].
 pub fn detect_tak_cot_type(input: &str) -> Result<TakCotMessage, Error> {
     let cot_msg = parse(input)?;
     // List of tuples of <string to search for> -> <implied message type if found>

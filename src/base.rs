@@ -50,6 +50,8 @@ pub struct Cot<D> {
         deserialize_with = "deserialize_date"
     )]
     pub stale: DateTime<Utc>,
+    #[serde(rename = "@how", skip_serializing_if = "Option::is_none")]
+    pub how: Option<String>,
     #[serde(rename = "detail")]
     pub detail: D,
     #[serde(rename = "point")]

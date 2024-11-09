@@ -36,6 +36,7 @@ impl Default for Cot<TakMarkerDetail> {
             start: now,
             // now plus 1 day
             stale: now + chrono::Duration::days(1),
+            how: Some("m-g".to_string()),
             detail,
             point: Point::north_pole(),
         }

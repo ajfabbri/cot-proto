@@ -18,6 +18,7 @@ impl From<CotBase> for CotUnparsedDetail {
             time: cot.time,
             start: cot.start,
             stale: cot.stale,
+            how: cot.how,
             detail: vec![],
             point: cot.point,
         }

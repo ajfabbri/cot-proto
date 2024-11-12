@@ -4,7 +4,7 @@
 [Actions]: https://github.com/ajfabbri/cot-proto/actions/workflows/ci.yml
 [Latest Version]: https://img.shields.io/crates/v/cot_proto.svg
 [crates.io]: https://crates.io/crates/cot\_proto
-[Documentation]: https://docs.rs/cot_proto/badge.svg
+[Documentation]: https://img.shields.io/crates/v/cot-proto?label=docs&color=%231122ee&link=https%3A%2F%2Fdocs.rs%2Fcot-proto
 [docs.rs]: https://docs.rs/cot_proto
 
 # Cursor on Target (COT) Protocol

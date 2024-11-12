@@ -10,11 +10,17 @@
 # Cursor on Target (COT) Protocol
 
 This library aims to provide a simple way to produce (serialize) and consume
-(deserialize) Cursor on Target (CoT) messages.
+(deserialize) Cursor on Target (CoT) messages from the Rust programming
+language.
+
+API docs are available at [docs.rs/cot_proto](https://docs.rs/cot_proto).
+
+Some example usage can be found at [cot-send-example.git](https://github.com/ajfabbri/cot-send-example).
 
 ### Initial goals:
-- Support for base CoT schema
+- Support for base CoT schema.
 - Basic Rust structs for CoT messages, with serde support.
+- Types for interoperating with TAK / ATAK, e.g. placing a marker on the map.
 
 ### TODOs
 - [ ] Add more typed schemas for common detail contents (sub-schemas)

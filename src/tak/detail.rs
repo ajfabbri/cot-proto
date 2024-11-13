@@ -57,11 +57,13 @@ pub struct Link {
 pub struct Contact {
     #[serde(rename = "@callsign")]
     pub callsign: String,
-    #[serde(rename = "emailAddress")]
+    #[serde(rename = "@emailAddress", skip_serializing_if = "Option::is_none")]
     pub email_address: Option<String>,
+    #[serde(rename = "@endpoint", skip_serializing_if = "Option::is_none")]
     pub endpoint: Option<String>,
+    #[serde(rename = "@phone", skip_serializing_if = "Option::is_none")]
     pub phone: Option<u32>,
-    #[serde(rename = "xmppUsername")]
+    #[serde(rename = "@xmppUsername", skip_serializing_if = "Option::is_none")]
     pub xmpp_username: Option<String>,
 }
 impl Default for Contact {

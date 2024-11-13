@@ -27,6 +27,7 @@ impl From<CotBase> for CotUnparsedDetail {
 
 /// Deserialize a UTF8 XML CoT message into a struct, but capture the `<detail>` section as an
 /// unparsed `Vec<String>`.
+///
 /// If you want to parse the `<detail>` section into a strongly-typed struct, instead do this:
 /// ```rust
 /// # use cot_proto::base::Cot;

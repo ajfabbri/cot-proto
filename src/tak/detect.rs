@@ -19,6 +19,7 @@ pub enum TakCotType {
 }
 
 /// Result of parsing a TAK CoT message and attempting to detect a message type.
+///
 /// We don't actually parse the `<detail>` section, since it is so dynamic in practice.
 /// Thus, callers are responsible for further parsing of that section, for example using
 /// [`quick_xml::Reader`].
@@ -28,6 +29,7 @@ pub struct TakCotMessage {
 }
 
 /// Use a heuristic to detect the type of TAK XML CoT message contained in supplied text.
+///
 /// Warning: This is based on known example messages from ATAK repository.
 ///   To get the raw type string, use [`parse_cot_msg_type()`].
 pub fn detect_tak_cot_type(input: &str) -> Result<TakCotMessage, Error> {

@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 use crate::base::deserialize_date;
 
 /// Type definitions for CoT detail sections for TAK messages.
+///
 /// Limited message types supported so far.
 
 /// `<detail>` section for a Marker message, with reasonable defaults to put a dot on a map (i.e.

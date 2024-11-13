@@ -15,11 +15,15 @@ use crate::base::deserialize_date;
 #[derive(Debug, Default, Deserialize, Serialize)]
 pub struct TakMarkerDetail {
     pub status: Status,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub link: Option<Link>,
     pub contact: Contact,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub remarks: Option<Remarks>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
     pub precisionlocation: PrecisionLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub usericon: Option<UserIcon>,
 }
 

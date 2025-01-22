@@ -12,7 +12,7 @@ use crate::base::deserialize_date;
 /// when sent to TAK).
 /// Note: ATAK's "Marker*.xsd" schemas don't list these elements as optional,
 /// (i.e. missing `maxOccurs="0"`) but I was told by a dev that many are optional.
-#[derive(Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct TakMarkerDetail {
     pub status: Status,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -28,7 +28,7 @@ pub struct TakMarkerDetail {
 }
 
 // TODO move these common definitions
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Status {
     #[serde(rename = "@readiness")]
     pub readiness: bool,
@@ -39,7 +39,7 @@ impl Default for Status {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Link {
     #[serde(rename = "@uid")]
     uid: String,
@@ -57,7 +57,7 @@ pub struct Link {
     pub relation: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Contact {
     #[serde(rename = "@callsign")]
     pub callsign: String,
@@ -82,20 +82,20 @@ impl Default for Contact {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Remarks {
     // TODO is is probably not right
     #[serde(rename = "$value")]
     pub source: Option<Vec<String>>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Color {
     #[serde(rename = "@argb")]
     pub argb: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct PrecisionLocation {
     #[serde(rename = "@altsrc")]
     pub altsrc: String,
@@ -121,7 +121,7 @@ impl Default for PrecisionLocation {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct UserIcon {
     #[serde(rename = "@iconsetpath")]
     iconsetpath: String,

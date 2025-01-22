@@ -23,7 +23,7 @@ pub const COT_BASE_EXAMPLE: &str = r#"
 </event>
 "#;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename = "event")]
 pub struct Cot<D> {
     #[serde(rename = "@version")]
@@ -117,7 +117,7 @@ pub type CotBase = Cot<NoDetail>;
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct NoDetail {}
 
-#[derive(Serialize, Deserialize, Debug, PartialEq)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 pub struct Point {
     #[serde(rename = "@lat")]
     pub lat: f64,

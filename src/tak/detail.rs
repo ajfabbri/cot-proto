@@ -99,13 +99,22 @@ pub struct Color {
 pub struct PrecisionLocation {
     #[serde(rename = "@altsrc")]
     pub altsrc: String,
-    #[serde(rename = "@geopointsrc")]
+    #[serde(rename = "@geopointsrc", skip_serializing_if = "Option::is_none")]
     pub geopointsrc: Option<String>,
-    #[serde(rename = "@PRECISE_IMAGE_FILE")]
+    #[serde(
+        rename = "@PRECISE_IMAGE_FILE",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub pi_file: Option<String>,
-    #[serde(rename = "@PRECISE_IMAGE_FILE_X")]
+    #[serde(
+        rename = "@PRECISE_IMAGE_FILE_X",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub pi_file_x: Option<String>,
-    #[serde(rename = "@PRECISE_IMAGE_FILE_Y")]
+    #[serde(
+        rename = "@PRECISE_IMAGE_FILE_Y",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub pi_file_y: Option<String>,
 }
 

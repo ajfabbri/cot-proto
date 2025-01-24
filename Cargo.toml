@@ -1,7 +1,7 @@
 [package]
 name = "cot-proto"
 description = "Cursor on Target (CoT) protocol (de)serialization / parsing"
-version = "0.3.7"
+version = "0.3.8"
 edition = "2021"
 keywords = ["cot", "protocol", "cursor_on_target"]
 categories = ["network-programming"]
